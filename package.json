@@ -1,0 +1,42 @@
+{
+  "name": "megaeth-audit",
+  "version": "0.1.0",
+  "description": "Solidity contract and project scanner for MegaETH. Catches dual gas model issues, volatile opcode throttling, EVM incompatibilities, and deprecated dependencies before deployment.",
+  "bin": {
+    "megaeth-audit": "./dist/bin/megaeth-audit.js"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": ["megaeth", "solidity", "audit", "evm", "smart-contracts", "dual-gas", "real-time", "l2"],
+  "author": "Heathen",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LoserLab/megaeth-audit"
+  },
+  "dependencies": {
+    "commander": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "playwright": "^1.58.2",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^3.0.0"
+  }
+}

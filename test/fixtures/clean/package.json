@@ -1,0 +1,8 @@
+{
+  "name": "clean-project",
+  "version": "1.0.0",
+  "devDependencies": {
+    "hardhat": "^2.19.0",
+    "viem": "^2.0.0"
+  }
+}

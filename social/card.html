@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>megaeth-audit social card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #19191A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .card {
+    width: 1200px;
+    height: 628px;
+    background: #ECE8E8;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 80px 64px 80px;
+  }
+
+  .top-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ECE8E8 0%, #F5AF94 20%, #FF8AA8 50%, #90D79F 80%, #ECE8E8 100%);
+    z-index: 10;
+  }
+
+  .glow-top {
+    position: absolute;
+    top: -180px;
+    right: 20%;
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(245, 175, 148, 0.10) 0%, rgba(245, 175, 148, 0.03) 50%, transparent 70%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .glow-left {
+    position: absolute;
+    bottom: -60px;
+    left: -40px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(144, 215, 159, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Faded Solidity code background */
+  .code-bg {
+    position: absolute;
+    top: 32px;
+    right: 50px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.8;
+    white-space: pre;
+    pointer-events: none;
+    z-index: 2;
+    user-select: none;
+    color: rgba(25, 25, 26, 0.04);
+  }
+
+  .code-bg .c-accent { color: rgba(255, 138, 168, 0.16); }
+  .code-bg .c-warn { color: rgba(245, 175, 148, 0.12); }
+  .code-bg .c-dim { color: rgba(25, 25, 26, 0.03); }
+
+  .brand {
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .brand-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #19191A;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .brand-line {
+    width: 32px;
+    height: 1px;
+    background: rgba(25, 25, 26, 0.12);
+  }
+
+  .brand-type {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: #FF8AA8;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .badge {
+    position: absolute;
+    top: 36px;
+    right: 80px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(255, 138, 168, 0.3);
+    border-radius: 100px;
+    background: rgba(255, 138, 168, 0.06);
+  }
+
+  .badge-dot {
+    width: 5px;
+    height: 5px;
+    background: #FF8AA8;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 138, 168, 0.5);
+  }
+
+  .badge-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: #FF8AA8;
+    letter-spacing: 0.08em;
+  }
+
+  .content {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .cmd-line {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(25, 25, 26, 0.4);
+    margin-bottom: 4px;
+  }
+
+  .cmd-line .prompt {
+    color: rgba(255, 138, 168, 0.6);
+  }
+
+  .title {
+    font-family: 'Inter', sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: #19191A;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+
+  .title .dim {
+    color: rgba(25, 25, 26, 0.25);
+  }
+
+  .title .accent {
+    color: #FF8AA8;
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(25, 25, 26, 0.6);
+    line-height: 1.5;
+  }
+
+  .bottom-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid rgba(25, 25, 26, 0.06);
+  }
+
+  .pills {
+    display: flex;
+    gap: 8px;
+  }
+
+  .pill {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.02em;
+  }
+
+  .pill-pink {
+    background: rgba(255, 138, 168, 0.08);
+    border: 1px solid rgba(255, 138, 168, 0.2);
+    color: #FF8AA8;
+  }
+
+  .pill-ghost {
+    background: rgba(25, 25, 26, 0.03);
+    border: 1px solid rgba(25, 25, 26, 0.08);
+    color: rgba(25, 25, 26, 0.5);
+  }
+
+  .bottom-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .built-in {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(25, 25, 26, 0.4);
+    letter-spacing: 0.02em;
+  }
+
+  .repo-link {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(25, 25, 26, 0.4);
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top-line"></div>
+  <div class="glow-top"></div>
+  <div class="glow-left"></div>
+
+  <div class="code-bg"><span class="c-dim">// SPDX-License-Identifier: MIT</span>
+<span class="c-dim">pragma solidity ^0.8.20;</span>
+
+<span class="c-dim">contract MegaETHVulnerable {</span>
+    <span class="c-warn">// CRITICAL: 21000 gas insufficient on MegaETH</span>
+    <span class="c-warn">uint256 gasForCall = 21000;</span>
+    <span class="c-dim">// minimum is 60,000 (compute + storage)</span>
+
+    <span class="c-accent">// volatile opcode caps compute to 20M</span>
+    <span class="c-accent">uint256 ts = block.timestamp;</span>
+    <span class="c-dim">uint256 result = heavyCompute(ts);</span>
+
+    <span class="c-warn">// 98/100 gas forwarding, not 63/64</span>
+    <span class="c-dim">function untrustedCall() {</span>
+        <span class="c-accent">target.call{gas: gasleft() * 63 / 64}("");</span>
+    <span class="c-dim">}</span>
+<span class="c-dim">}</span></div>
+
+  <div class="brand">
+    <span class="brand-name">heathen</span>
+    <div class="brand-line"></div>
+    <span class="brand-type">Open Source</span>
+  </div>
+
+  <div class="badge">
+    <div class="badge-dot"></div>
+    <span class="badge-text">CONTRACT SCANNER</span>
+  </div>
+
+  <div class="content">
+    <div class="cmd-line">
+      <span class="prompt">$</span> npx megaeth-audit ./contracts
+    </div>
+
+    <div>
+      <div class="title">megaeth<span class="dim">-</span><span class="accent">audit</span></div>
+      <div class="subtitle">Solidity contract scanner for MegaETH. Catches dual gas model issues, volatile opcode throttling, and EVM incompatibilities.</div>
+    </div>
+
+    <div class="bottom-row">
+      <div class="pills">
+        <span class="pill pill-pink">19 Rules</span>
+        <span class="pill pill-pink">Dual Gas Model</span>
+        <span class="pill pill-ghost">Deps Audit</span>
+        <span class="pill pill-ghost">CI-Ready</span>
+        <span class="pill pill-ghost">MIT License</span>
+      </div>
+      <div class="bottom-right">
+        <span class="built-in">Built in Mirra</span>
+        <span class="repo-link">github.com/LoserLab/megaeth-audit</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
