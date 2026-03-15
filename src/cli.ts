@@ -6,7 +6,7 @@ import type { Severity } from "./rules/types";
 
 const SEVERITY_ORDER: Severity[] = ["critical", "high", "moderate", "info"];
 
-export async function cli(argv: string[]): Promise<void> {
+export function cli(argv: string[]): void {
   const program = new Command();
 
   program
@@ -51,8 +51,8 @@ export async function cli(argv: string[]): Promise<void> {
         } else if (result.summary.high > 0 || result.summary.moderate > 0) {
           process.exit(1);
         }
-      } catch (err: any) {
-        console.error(`Error: ${err.message}`);
+      } catch (err: unknown) {
+        console.error(`Error: ${err instanceof Error ? err.message : String(err)}`);
         process.exit(1);
       }
     });
